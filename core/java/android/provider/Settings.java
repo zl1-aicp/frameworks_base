@@ -4651,6 +4651,16 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Whether to mute annoying notifications
+         * @hide
+         */
+        public static final String MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD = "mute_annoying_notifications_threshold";
+
+        /** @hide */
+        private static final Validator MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD_VALIDATOR =
+              new SettingsValidators.InclusiveIntegerRangeValidator(0, 120000);
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -4765,6 +4775,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_BAR_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_BAR_ANIMATE);
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
+            PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
             // AICP Settings end
         }
 
@@ -4871,6 +4882,8 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_BATTERY_BAR_ANIMATE, STATUSBAR_BATTERY_BAR_ANIMATE_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON,
                     NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
+            VALIDATORS.put(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD,
+                    MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD_VALIDATOR);
             // AICP Settings end
         }
 
