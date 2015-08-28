@@ -5292,6 +5292,16 @@ public final class Settings {
         private static final Validator STATUS_BAR_LOGO_STYLE_VALIDATOR =
               ANY_STRING_VALIDATOR;
 
+        /**
+         * Toast icon
+         * @hide
+         */
+        public static final String TOAST_ICON = "toast_icon";
+
+        /** @hide */
+        private static final Validator TOAST_ICON_VALIDATOR =
+              BOOLEAN_VALIDATOR;
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -5444,6 +5454,7 @@ public final class Settings {
             STATUS_BAR_LOGO_COLOR,
             STATUS_BAR_LOGO_POSITION,
             STATUS_BAR_LOGO_STYLE,
+            TOAST_ICON,
             // AICP Settings end
         };
 
@@ -5644,6 +5655,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_COLOR);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_POSITION);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_STYLE);
+            PRIVATE_SETTINGS.add(TOAST_ICON);
             // AICP Settings end
         }
 
@@ -5834,6 +5846,7 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_LOGO_COLOR, STATUS_BAR_LOGO_COLOR_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_LOGO_POSITION, STATUS_BAR_LOGO_POSITION_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_LOGO_STYLE, STATUS_BAR_LOGO_STYLE_VALIDATOR);
+            VALIDATORS.put(TOAST_ICON,TOAST_ICON_VALIDATOR);
             // AICP Settings end
         }
 
