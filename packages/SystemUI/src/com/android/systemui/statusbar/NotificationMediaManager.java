@@ -128,6 +128,7 @@ public class NotificationMediaManager implements Dumpable {
     private ImageView mBackdropBack;
 
     private boolean mShowCompactMediaSeekbar;
+    private boolean mLockscreenMediaMetadata;
     private final DeviceConfig.OnPropertiesChangedListener mPropertiesChangedListener =
             new DeviceConfig.OnPropertiesChangedListener() {
         @Override
@@ -466,7 +467,7 @@ public class NotificationMediaManager implements Dumpable {
         }
 
         Bitmap artworkBitmap = null;
-        if (mediaMetadata != null) {
+        if (mediaMetadata != null && mLockscreenMediaMetadata) {
             artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (artworkBitmap == null) {
                 artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
@@ -740,5 +741,9 @@ public class NotificationMediaManager implements Dumpable {
                 Settings.System.OMNI_LOCKSCREEN_MEDIA_BLUR, 25,
                 UserHandle.USER_CURRENT) / 100;
         return level;
+    }
+
+    public void setLockscreenMediaMetadata(boolean lockscreenMediaMetadata) {
+        mLockscreenMediaMetadata = lockscreenMediaMetadata;
     }
 }
