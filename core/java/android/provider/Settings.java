@@ -5396,6 +5396,16 @@ public final class Settings {
         private static final Validator LESS_BORING_HEADS_UP_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+        /**
+         * Enable/Disable screenshot sound
+         * @hide
+         */
+        public static final String SCREENSHOT_SOUND = "screenshot_sound";
+
+        /** @hide */
+        private static final Validator SCREENSHOT_SOUND_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -5556,6 +5566,7 @@ public final class Settings {
             HEADS_UP_NOTIFICATION_SNOOZE,
             HEADS_UP_TIMEOUT,
             LESS_BORING_HEADS_UP,
+            SCREENSHOT_SOUND,
             // AICP Settings end
         };
 
@@ -5764,6 +5775,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HEADS_UP_NOTIFICATION_SNOOZE);
             PRIVATE_SETTINGS.add(HEADS_UP_TIMEOUT);
             PRIVATE_SETTINGS.add(LESS_BORING_HEADS_UP);
+            PRIVATE_SETTINGS.add(SCREENSHOT_SOUND);
             // AICP Settings end
         }
 
@@ -5962,6 +5974,7 @@ public final class Settings {
             VALIDATORS.put(HEADS_UP_NOTIFICATION_SNOOZE,HEADS_UP_NOTIFICATION_SNOOZE_VALIDATOR);
             VALIDATORS.put(HEADS_UP_TIMEOUT,HEADS_UP_TIMEOUT_VALIDATOR);
             VALIDATORS.put(LESS_BORING_HEADS_UP, LESS_BORING_HEADS_UP_VALIDATOR);
+            VALIDATORS.put(SCREENSHOT_SOUND,SCREENSHOT_SOUND_VALIDATOR);
             // AICP Settings end
         }
 
