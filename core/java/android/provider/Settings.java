@@ -5944,6 +5944,22 @@ public final class Settings {
         private static final Validator ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+        /**
+         *  Weather to use a custom color for the visualizer on the lock screen
+         * @hide
+         */
+        public static final String LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR = "lock_screen_visualizer_use_custom_color";
+        /** @hide */
+        private static final Validator LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+        /**
+         *  Custom color of the visualizer on the lock screen
+         * @hide
+         */
+        public static final String LOCK_SCREEN_VISUALIZER_CUSTOM_COLOR = "lock_screen_visualizer_custom_color";
+
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -6156,6 +6172,7 @@ public final class Settings {
             POCKET_JUDGE,
             STATUS_BAR_BRIGHTNESS_CONTROL,
             ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER,
+            LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR,
             // AICP Settings end
         };
 
@@ -6422,6 +6439,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
             PRIVATE_SETTINGS.add(ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER);
+            PRIVATE_SETTINGS.add(LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR);
             // AICP Settings end
         }
 
@@ -6674,6 +6692,8 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_BRIGHTNESS_CONTROL, STATUS_BAR_BRIGHTNESS_CONTROL_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_MEDIA_METADATA,LOCKSCREEN_MEDIA_METADATA_VALIDATOR);
             VALIDATORS.put(ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER,ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR,
+                    LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR_VALIDATOR);
             // AICP Settings end
         }
 
