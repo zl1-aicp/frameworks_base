@@ -38,4 +38,7 @@
     <integer name="config_maxVisibleNotificationIcons">3</integer>
     <integer name="config_maxVisibleNotificationIconsWhenDark">3</integer>
 
+    <!-- Burn in protection -->
+    <bool name="config_statusBarBurnInProtection">false</bool>
+    <integer name="config_shift_interval">60</integer>
 </resources>
