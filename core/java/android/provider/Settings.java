@@ -5169,6 +5169,14 @@ public final class Settings {
         private static final Validator GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR =
               BOOLEAN_VALIDATOR;
 
+        /**
+         * @hide
+         */
+        public static final String ROAMING_INDICATOR_ICON = "roaming_indicator_icon";
+
+        /** @hide */
+        private static final Validator ROAMING_INDICATOR_ICON_VALIDATOR = BOOLEAN_VALIDATOR;
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -5310,6 +5318,7 @@ public final class Settings {
             TRANSPARENT_POWER_MENU,
             TRANSPARENT_POWER_DIALOG_DIM,
             GLOBAL_ACTIONS_SCREENRECORD,
+            ROAMING_INDICATOR_ICON,
             // AICP Settings end
         };
 
@@ -5499,6 +5508,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(TRANSPARENT_POWER_MENU);
             PRIVATE_SETTINGS.add(TRANSPARENT_POWER_DIALOG_DIM);
             PRIVATE_SETTINGS.add(GLOBAL_ACTIONS_SCREENRECORD);
+            PRIVATE_SETTINGS.add(ROAMING_INDICATOR_ICON);
             // AICP Settings end
         }
 
@@ -5678,6 +5688,7 @@ public final class Settings {
             VALIDATORS.put(TRANSPARENT_POWER_MENU,TRANSPARENT_POWER_MENU_VALIDATOR);
             VALIDATORS.put(TRANSPARENT_POWER_DIALOG_DIM,TRANSPARENT_POWER_DIALOG_DIM_VALIDATOR);
             VALIDATORS.put(GLOBAL_ACTIONS_SCREENRECORD,GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR);
+            VALIDATORS.put(ROAMING_INDICATOR_ICON,ROAMING_INDICATOR_ICON_VALIDATOR);
             // AICP Settings end
         }
 
