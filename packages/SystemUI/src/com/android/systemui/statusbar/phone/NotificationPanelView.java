@@ -3193,6 +3193,10 @@ public class NotificationPanelView extends PanelView implements
         mNotificationStackScroller.setPulseReason(reason);
     }
 
+    public void clearAllNotifications(boolean forceToLeft) {
+        mNotificationStackScroller.clearAllNotifications(forceToLeft);
+    }
+
     /**
      * Panel and QS expansion callbacks.
      */

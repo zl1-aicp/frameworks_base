@@ -649,6 +649,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private ShadeController mShadeController;
 
     // aicp additions start
+    private boolean mFpDismissNotifications;
+
     private class AicpSettingsObserver extends ContentObserver {
         AicpSettingsObserver(Handler handler) {
             super(handler);
@@ -692,6 +694,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_MEDIA_METADATA),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -713,6 +718,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateHeadsUpBlackList();
             setScreenBrightnessMode();
             setLockscreenMediaArt();
+            setFpToDismissNotifications();
         }
     }
 
@@ -1938,6 +1944,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mNotificationPanel.flingSettings(0 /* velocity */,
                         NotificationPanelView.FLING_EXPAND);
                 mMetricsLogger.count(NotificationPanelView.COUNTER_PANEL_OPEN_QS, 1);
+            }
+        } else if (mFpDismissNotifications && (KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT == key
+                || KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT == key)) {
+            if (!mNotificationPanel.isFullyCollapsed() && !mNotificationPanel.isExpanding()){
+                mMetricsLogger.action(MetricsEvent.ACTION_DISMISS_ALL_NOTES);
+                mNotificationPanel.clearAllNotifications(KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT == key ? true : false);
             }
         }
 
@@ -4839,5 +4851,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         boolean lockscreenMediaMetadata = Settings.System.getIntForUser(mContext.getContentResolver(),
                         Settings.System.LOCKSCREEN_MEDIA_METADATA, 0, UserHandle.USER_CURRENT) == 1;
         mMediaManager.setLockscreenMediaMetadata(lockscreenMediaMetadata);
+    }
+
+    private void setFpToDismissNotifications() {
+        mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
+                UserHandle.USER_CURRENT) == 1;
     }
 }
