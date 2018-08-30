@@ -67,9 +67,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_centerHorizontal="true"
             android:textColor="?attr/wallpaperTextColorSecondary"
-            android:textSize="@dimen/widget_label_font_size"
-            android:letterSpacing="0.05"
             android:ellipsize="marquee"
-            android:singleLine="true" />
+            android:singleLine="true"
+            style="@style/TextAppearance.Keyguard" />
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>
