@@ -5467,6 +5467,18 @@ public final class Settings {
         private static final Validator TOAST_ANIMATION_VALIDATOR =
               new SettingsValidators.InclusiveIntegerRangeValidator(0, 15);
 
+        /**
+         * Whether to show the kill app button in notification guts
+         *
+         * @hide
+         */
+        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
+                "notification_guts_kill_app_button";
+
+        /** @hide */
+        private static final Validator NOTIFICATION_GUTS_KILL_APP_BUTTON_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -5634,6 +5646,7 @@ public final class Settings {
             OMNI_LOCKSCREEN_WEATHER_ENABLED,
             AICP_LOCKSCREEN_WEATHER_STYLE,
             TOAST_ANIMATION,
+            NOTIFICATION_GUTS_KILL_APP_BUTTON,
             // AICP Settings end
         };
 
@@ -5849,6 +5862,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_WEATHER_ENABLED);
             PRIVATE_SETTINGS.add(AICP_LOCKSCREEN_WEATHER_STYLE);
             PRIVATE_SETTINGS.add(TOAST_ANIMATION);
+            PRIVATE_SETTINGS.add(NOTIFICATION_GUTS_KILL_APP_BUTTON);
             // AICP Settings end
         }
 
@@ -6054,6 +6068,8 @@ public final class Settings {
             VALIDATORS.put(OMNI_LOCKSCREEN_WEATHER_ENABLED,OMNI_LOCKSCREEN_WEATHER_ENABLED_VALIDATOR);
             VALIDATORS.put(AICP_LOCKSCREEN_WEATHER_STYLE,AICP_LOCKSCREEN_WEATHER_STYLE_VALIDATOR);
             VALIDATORS.put(TOAST_ANIMATION,TOAST_ANIMATION_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_GUTS_KILL_APP_BUTTON,
+                    NOTIFICATION_GUTS_KILL_APP_BUTTON_VALIDATOR);
             // AICP Settings end
         }
 
