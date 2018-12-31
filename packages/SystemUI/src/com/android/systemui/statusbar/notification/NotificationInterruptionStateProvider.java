@@ -43,6 +43,8 @@ import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.phone.ShadeController;
 import com.android.systemui.statusbar.policy.HeadsUpManager;
 
+import java.util.ArrayList;
+
 /**
  * Provides heads-up and pulsing state for notification entries.
  */
@@ -73,6 +75,7 @@ public class NotificationInterruptionStateProvider {
     private boolean mDisableNotificationAlerts;
 
     private boolean mLessBoringHeadsUp;
+    private ArrayList<String> mHeadsUpBlacklist = new ArrayList<String>();
 
     public NotificationInterruptionStateProvider(Context context) {
         this(context,
@@ -347,6 +350,14 @@ public class NotificationInterruptionStateProvider {
         return !getShadeController().isDozing() && mLessBoringHeadsUp && !isImportantHeadsUp;
     }
 
+    private boolean isPackageBlacklisted(String packageName) {
+        return mHeadsUpBlacklist.contains(packageName);
+    }
+
+    public void setHeadsUpBlacklist(ArrayList<String> arrayList) {
+            mHeadsUpBlacklist = arrayList;
+    }
+
     /**
      * Common checks between heads up alerting and bubble fly out alerting. See
      * {@link #shouldHeadsUp(NotificationEntry)} and
@@ -358,6 +369,11 @@ public class NotificationInterruptionStateProvider {
      */
     public boolean canHeadsUpCommon(NotificationEntry entry) {
         StatusBarNotification sbn = entry.notification;
+
+        // check if package is blacklisted first
+        if (isPackageBlacklisted(sbn.getPackageName())) {
+            return false;
+        }
 
         if (!mUseHeadsUp || mPresenter.isDeviceInVrMode() || shouldSkipHeadsUp(sbn)) {
             if (DEBUG) {
