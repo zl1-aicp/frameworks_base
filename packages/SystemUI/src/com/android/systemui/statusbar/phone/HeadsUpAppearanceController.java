@@ -21,6 +21,7 @@ import android.graphics.Rect;
 import android.view.DisplayCutout;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.LinearLayout;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.ViewClippingUtil;
@@ -50,6 +51,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
     private final NotificationStackScrollLayout mStackScroller;
     private final HeadsUpStatusBarView mHeadsUpStatusBarView;
     private final ClockController mClockController;
+    private final LinearLayout mCustomIconArea;
     private final View mCenteredIconView;
     private final View mOperatorNameView;
     private final DarkIconDispatcher mDarkIconDispatcher;
@@ -89,6 +91,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 statusbarView.findViewById(R.id.notification_stack_scroller),
                 statusbarView.findViewById(R.id.notification_panel),
                 new ClockController(statusbarView),
+                statusbarView.findViewById(R.id.left_icon_area),
                 statusbarView.findViewById(R.id.operator_name_frame),
                 statusbarView.findViewById(R.id.centered_icon_area));
     }
@@ -101,6 +104,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
             NotificationStackScrollLayout stackScroller,
             NotificationPanelView panelView,
             ClockController clockController,
+            LinearLayout customIconArea,
             View operatorNameView,
             View centeredIconView) {
         mNotificationIconAreaController = notificationIconAreaController;
@@ -119,6 +123,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
         mStackScroller.addOnLayoutChangeListener(mStackScrollLayoutChangeListener);
         mStackScroller.setHeadsUpAppearanceController(this);
         mClockController = clockController;
+        mCustomIconArea = customIconArea;
         mOperatorNameView = operatorNameView;
         mDarkIconDispatcher = Dependency.get(DarkIconDispatcher.class);
         mDarkIconDispatcher.addDarkReceiver(this);
@@ -262,6 +267,9 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 if (mOperatorNameView != null) {
                     hide(mOperatorNameView, View.INVISIBLE);
                 }
+                if (mCustomIconArea != null) {
+                    hide(mCustomIconArea, View.INVISIBLE);
+                }
             } else {
                 if (!isRightClock && ((Clock)clockView).isClockVisible()) {
                     show(clockView);
@@ -271,6 +279,9 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 }
                 if (mOperatorNameView != null) {
                     show(mOperatorNameView);
+                }
+                if (mCustomIconArea != null) {
+                    show(mCustomIconArea);
                 }
                 hide(mHeadsUpStatusBarView, View.GONE, () -> {
                     updateParentClipping(true /* shouldClip */);
