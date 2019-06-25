@@ -5302,6 +5302,16 @@ public final class Settings {
         private static final Validator TOAST_ICON_VALIDATOR =
               BOOLEAN_VALIDATOR;
 
+        /**
+         * Whether to show wireless charging animation
+         * @hide
+         */
+        public static final String WIRELESS_CHARGING_ANIMATION = "wireless_charging_animation";
+
+        /** @hide */
+        private static final Validator WIRELESS_CHARGING_ANIMATION_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /***************************
          * AICP System Settings end
          ***************************/
@@ -5312,12 +5322,6 @@ public final class Settings {
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
          */
-
-        /**
-         * Whether to show charging animation
-         * @hide
-         */
-        public static final String CHARGING_ANIMATION = "charging_animation";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -5461,6 +5465,7 @@ public final class Settings {
             STATUS_BAR_LOGO_POSITION,
             STATUS_BAR_LOGO_STYLE,
             TOAST_ICON,
+            WIRELESS_CHARGING_ANIMATION,
             // AICP Settings end
         };
 
@@ -5662,6 +5667,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_POSITION);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_STYLE);
             PRIVATE_SETTINGS.add(TOAST_ICON);
+            PRIVATE_SETTINGS.add(WIRELESS_CHARGING_ANIMATION);
             // AICP Settings end
         }
 
@@ -5853,6 +5859,7 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_LOGO_POSITION, STATUS_BAR_LOGO_POSITION_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_LOGO_STYLE, STATUS_BAR_LOGO_STYLE_VALIDATOR);
             VALIDATORS.put(TOAST_ICON,TOAST_ICON_VALIDATOR);
+            VALIDATORS.put(WIRELESS_CHARGING_ANIMATION, WIRELESS_CHARGING_ANIMATION_VALIDATOR);
             // AICP Settings end
         }
 
