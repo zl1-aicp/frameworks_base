@@ -640,6 +640,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.LOCK_QS_DISABLED),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -657,6 +660,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (mQuickQSPanel != null) {
                 mQuickQSPanel.updateSettings();
             }
+            setUseLessBoringHeadsUp();
         }
     }
 
@@ -4634,4 +4638,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         return mStatusBarMode;
     }
 
+    private void setUseLessBoringHeadsUp() {
+        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LESS_BORING_HEADS_UP, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mNotificationInterruptionStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
+    }
 }
