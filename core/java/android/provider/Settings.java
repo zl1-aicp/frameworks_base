@@ -4850,7 +4850,9 @@ public final class Settings {
             PEOPLE_LOOKUP_PROVIDER,
             REVERSE_LOOKUP_PROVIDER,
             DIALER_OPENCNAM_ACCOUNT_SID,
-            DIALER_OPENCNAM_AUTH_TOKEN
+            DIALER_OPENCNAM_AUTH_TOKEN,
+            OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE,
+            OMNI_QS_LAYOUT_COLUMNS,
             // AICP Settings end
         };
 
@@ -4997,6 +4999,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(REVERSE_LOOKUP_PROVIDER);
             PRIVATE_SETTINGS.add(DIALER_OPENCNAM_ACCOUNT_SID);
             PRIVATE_SETTINGS.add(DIALER_OPENCNAM_AUTH_TOKEN);
+            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE);
+            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS);
             // AICP Settings end
         }
 
@@ -5124,6 +5128,9 @@ public final class Settings {
             VALIDATORS.put(REVERSE_LOOKUP_PROVIDER, REVERSE_LOOKUP_PROVIDER_VALIDATOR);
             VALIDATORS.put(DIALER_OPENCNAM_ACCOUNT_SID, DIALER_OPENCNAM_ACCOUNT_SID_VALIDATOR);
             VALIDATORS.put(DIALER_OPENCNAM_AUTH_TOKEN, DIALER_OPENCNAM_AUTH_TOKEN_VALIDATOR);
+            VALIDATORS.put(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE,
+                    OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR);
+            VALIDATORS.put(OMNI_QS_LAYOUT_COLUMNS, OMNI_QS_LAYOUT_COLUMNS_VALIDATOR);
             // AICP Settings end
         }
 
@@ -9299,6 +9306,22 @@ public final class Settings {
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         private static final Validator VOLUME_LINK_NOTIFICATION_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+        * Number of qs columns on landscape orientation
+        * @hide
+        */
+        public static final String OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
+        /** @hide */
+        private static final Validator OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR =
+               ANY_STRING_VALIDATOR;
+        /**
+        * @hide
+        */
+        public static final String OMNI_QS_LAYOUT_COLUMNS = "qs_layout_columns";
+        /** @hide */
+        private static final Validator OMNI_QS_LAYOUT_COLUMNS_VALIDATOR =
+               ANY_STRING_VALIDATOR;
 
         /*****************************
          * AICP System Settings end
