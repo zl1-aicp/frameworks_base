@@ -4550,6 +4550,16 @@ public final class Settings {
         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
         /**
+         *  Enable statusbar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String AICP_DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
+        /** @hide */
+        private static final Validator AICP_DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -4629,7 +4639,8 @@ public final class Settings {
             STATUSBAR_BATTERY_BAR_COLOR,
             STATUSBAR_BATTERY_BAR_THICKNESS,
             STATUSBAR_BATTERY_BAR_STYLE,
-            STATUSBAR_BATTERY_BAR_ANIMATE
+            STATUSBAR_BATTERY_BAR_ANIMATE,
+            AICP_DOUBLE_TAP_SLEEP_GESTURE,
             // AICP Settings end
         };
 
@@ -4791,6 +4802,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
             PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
             PRIVATE_SETTINGS.add(LOCKSCREEN_PIN_SCRAMBLE_LAYOUT);
+            PRIVATE_SETTINGS.add(AICP_DOUBLE_TAP_SLEEP_GESTURE);
             // AICP Settings end
         }
 
@@ -4900,6 +4912,8 @@ public final class Settings {
             VALIDATORS.put(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD,
                     MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,LOCKSCREEN_PIN_SCRAMBLE_LAYOUT_VALIDATOR);
+            VALIDATORS.put(AICP_DOUBLE_TAP_SLEEP_GESTURE,
+                    AICP_DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
             // AICP Settings end
         }
 
