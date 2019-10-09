@@ -810,7 +810,7 @@ public class NotificationPanelView extends PanelView implements
     }
 
     public void setQsExpansionEnabled(boolean qsExpansionEnabled) {
-        mQsExpansionEnabled = qsExpansionEnabled && !isQsSecureExpandDisabled();
+        mQsExpansionEnabled = qsExpansionEnabled;
         if (mQs == null) return;
         mQs.setHeaderClickable(qsExpansionEnabled);
     }
@@ -872,7 +872,7 @@ public class NotificationPanelView extends PanelView implements
     }
 
     public void expandWithQs() {
-        if (mQsExpansionEnabled) {
+        if (mQsExpansionEnabled && !isQsSecureExpandDisabled()) {
             mQsExpandImmediate = true;
             mNotificationStackScroller.setShouldShowShelfOnly(true);
         }
@@ -1148,7 +1148,7 @@ public class NotificationPanelView extends PanelView implements
         final int action = event.getActionMasked();
         if (action == MotionEvent.ACTION_DOWN && getExpandedFraction() == 1f
                 && mBarState != StatusBarState.KEYGUARD && !mQsExpanded
-                && mQsExpansionEnabled) {
+                && mQsExpansionEnabled && !isQsSecureExpandDisabled()) {
 
             // Down in the empty area while fully expanded - go to QS.
             mQsTracking = true;
@@ -1318,7 +1318,7 @@ public class NotificationPanelView extends PanelView implements
     @Override
     public void onOverscrollTopChanged(float amount, boolean isRubberbanded) {
         cancelQsAnimation();
-        if (!mQsExpansionEnabled) {
+        if (!mQsExpansionEnabled || isQsSecureExpandDisabled()) {
             amount = 0f;
         }
         float rounded = amount >= 1f ? amount : 0f;
@@ -1804,7 +1804,7 @@ public class NotificationPanelView extends PanelView implements
      * @return Whether we should intercept a gesture to open Quick Settings.
      */
     private boolean shouldQuickSettingsIntercept(float x, float y, float yDiff) {
-        if (!mQsExpansionEnabled || mCollapsedOnDown) {
+        if (!mQsExpansionEnabled || mCollapsedOnDown || isQsSecureExpandDisabled()) {
             return false;
         }
         View header = mKeyguardShowing || mQs == null ? mKeyguardStatusBar : mQs.getHeader();
