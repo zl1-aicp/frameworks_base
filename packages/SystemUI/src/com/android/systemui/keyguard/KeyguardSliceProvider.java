@@ -57,6 +57,7 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.statusbar.StatusBarState;
+import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.NextAlarmControllerImpl;
 import com.android.systemui.statusbar.policy.ZenModeController;
@@ -117,6 +118,7 @@ public class KeyguardSliceProvider extends SliceProvider implements
     private final AlarmManager.OnAlarmListener mUpdateNextAlarm = this::updateNextAlarm;
     private final HashSet<Integer> mMediaInvisibleStates;
     private final Object mMediaToken = new Object();
+    private DozeParameters mDozeParameters;
     @VisibleForTesting
     protected SettableWakeLock mMediaWakeLock;
     @VisibleForTesting
@@ -140,6 +142,8 @@ public class KeyguardSliceProvider extends SliceProvider implements
     protected boolean mDozing;
     private int mStatusBarState;
     private boolean mMediaIsVisible;
+    private boolean mPulseOnNewTracks;
+    private static final String PULSE_ACTION = "com.android.systemui.doze.pulse";
 
     private OmniJawsClient mWeatherClient;
     private OmniJawsClient.WeatherInfo mWeatherInfo;
@@ -219,11 +223,13 @@ public class KeyguardSliceProvider extends SliceProvider implements
      */
     public void initDependencies(
             NotificationMediaManager mediaManager,
-            StatusBarStateController statusBarStateController) {
+            StatusBarStateController statusBarStateController,
+            DozeParameters dozeParameters) {
         mMediaManager = mediaManager;
         mMediaManager.addCallback(this);
         mStatusBarStateController = statusBarStateController;
         mStatusBarStateController.addCallback(this);
+        mDozeParameters = dozeParameters;
     }
 
     @AnyThread
@@ -612,7 +618,17 @@ public class KeyguardSliceProvider extends SliceProvider implements
         mMediaTitle = title;
         mMediaArtist = artist;
         mMediaIsVisible = nextVisible;
+
         notifyChange();
+        // if AoD is disabled, the device is not already dozing and we get a new track, trigger an ambient pulse event
+        if (mPulseOnNewTracks && nextVisible && !mDozeParameters.getAlwaysOn() && mDozing) {
+            getContext().sendBroadcastAsUser(new Intent(PULSE_ACTION),
+                    new UserHandle(UserHandle.USER_CURRENT));
+        }
+    }
+
+    public void setPulseOnNewTracks(boolean enabled) {
+        mPulseOnNewTracks = enabled;
     }
 
     protected void notifyChange() {
