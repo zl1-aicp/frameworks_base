@@ -34,4 +34,8 @@
     -->
     <integer name="hardware_ui_align">53</integer>
 
+    <!-- Max visible notification icons -->
+    <integer name="config_maxVisibleNotificationIcons">3</integer>
+    <integer name="config_maxVisibleNotificationIconsWhenDark">3</integer>
+
 </resources>
