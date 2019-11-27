@@ -264,6 +264,10 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
         return mQSCustomizer;
     }
 
+    public QuickStatusBarHeader getQuickStatusBarHeader() {
+        return mHeader;
+    }
+
     @Override
     public boolean isShowingDetail() {
         return mQSPanel.isShowingCustomize() || mQSDetail.isShowingDetail();
